@@ -1,0 +1,4 @@
+2. Installing Dependencies
+Inside the User Data script, installed:
+apt update -y
+apt install -y apache2 php libapache2-mod-php wget tar
