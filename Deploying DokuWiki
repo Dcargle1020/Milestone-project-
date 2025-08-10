@@ -1,5 +1,0 @@
-Downloaded the latest stable DokuWiki release:
-wget -q https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
-tar -xzf dokuwiki-stable.tgz
-mv "$(tar -tzf dokuwiki-stable.tgz | head -1 | cut -d/ -f1)" dokuwiki
-Moved files into /var/www/html/dokuwiki.
