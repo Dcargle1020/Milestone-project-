@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+# Deployment Steps (high-level)
+# -----------------------------------------------------------------------------
+# How to run:  bash deployment_steps.sh
+# -----------------------------------------------------------------------------
+
+cat <<'EOF'
+# Deployment Steps
+
+1) Create Security Group
+   - Inbound: TCP 22 (SSH) from your IP
+   - Inbound: TCP 80 (HTTP) from 0.0.0.0/0
+
+2) Launch EC2 (Ubuntu, t2.micro)
+   - User data: paste your prepared bash script
+
+3) User Data does the rest:
+   - apt-get update && install Apache + PHP modules
+   - download + extract DokuWiki into /var/www/html/dokuwiki
+   - create data/ directories with correct ownership (www-data)
+   - write `conf/local.php` with:
+       $conf['title'] = "Dominique's Milestone Wiki";
+       $conf['start'] = 'home';
+   - create pages:
+       data/pages/home.txt
+       data/pages/aws_notes.txt
+       data/pages/linux_commands.txt
+   - run indexer, restart Apache
+
+4) Verify
+   - Open: http://<EC2-Public-IP>/dokuwiki/doku.php
+   - You should see the wiki, and the pages available.
+EOF
