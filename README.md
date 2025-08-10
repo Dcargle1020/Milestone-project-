@@ -1,39 +1,55 @@
-# 📚 Dominique's Milestone Wiki
+# 🏗️ Milestone Project – AWS EC2 + DokuWiki Deployment
 
-## 📝 Project Overview
-This project deploys and configures a **DokuWiki** web application on an **Apache** server running on an **Ubuntu EC2 instance** in AWS.  
-The wiki serves as a **knowledge base** with AWS notes, Linux command references, and other resources.  
-The goal: **Automate** the entire setup so the server is fully functional at first boot via an **EC2 User Data script**.
+This project demonstrates the deployment and configuration of a **DokuWiki** web application on an **Apache web server** running on an **Ubuntu EC2 instance** in **AWS**.  
+The wiki serves as a knowledge base containing AWS notes, Linux commands, and other learning resources.
 
----
-
-## 🚀 Tech Stack
-- ☁️ **Cloud Platform:** Amazon Web Services (AWS)  
-- 💻 **Compute:** EC2 (Elastic Compute Cloud)  
-- 🐧 **OS:** Ubuntu  
-- 🌐 **Web Server:** Apache 2.4.58  
-- 🖥 **Language:** PHP  
-- 📄 **Application:** DokuWiki  
-- ⚙️ **Automation:** Bash (User Data Script)  
+The goal was to configure the environment **automatically** using a **Bash User Data Script**, so that the EC2 instance is fully functional on first boot.
 
 ---
 
-## 📂 Deployment Steps
+## 📚 Table of Contents
+- [Project Overview](#project-overview)
+- [Technical Stack](#technical-stack)
+- [Deployment Steps](#deployment-steps)
+- [Accessing the Wiki](#accessing-the-wiki)
+- [Reports](#reports)
+- [Lessons Learned](#lessons-learned)
+- [Future Improvements](#future-improvements)
 
-### 1️⃣ Launch EC2 Instance
-- Chose **Ubuntu AMI**  
-- Security Group rules:  
-  - HTTP → Port 80  
-  - SSH → Port 22  
-- Assigned **public IP** for access
+---
 
-### 2️⃣ Install Dependencies
-```bash
-apt update -y
-apt install -y apache2 php libapache2-mod-php wget tar
+## Project Overview
+This project automates:
+- Launching an EC2 instance on AWS
+- Installing Apache, PHP, and DokuWiki
+- Configuring permissions and directories
+- Hosting a functional wiki for documentation
 
-## Documentation
-- [Accessing the Wiki](docs/accessing-the-wiki.md)
-- [User Data Script](docs/user-data-script.md)
-- [CPU Health Check Report](reports/cpu-check.md)
-- [Troubleshooting Notes](reports/troubleshooting.md)
+---
+
+## Technical Stack
+- **Cloud Platform:** Amazon Web Services (AWS)
+- **Compute Service:** EC2 (Elastic Compute Cloud)
+- **Operating System:** Ubuntu
+- **Web Server:** Apache 2.4.58
+- **Scripting Language:** PHP, Bash
+- **Application:** [DokuWiki](https://www.dokuwiki.org/dokuwiki)
+- **Automation:** Bash User Data Script
+
+---
+
+## Deployment Steps
+1. **Launch EC2 Instance**  
+   - Chose **Ubuntu AMI**  
+   - Set instance type (t2.micro for testing)
+2. **Configure Security Group**  
+   - Allowed inbound HTTP (port 80) and SSH (port 22)
+3. **Add User Data Script** to automate installation and configuration
+4. **Access the Wiki** using the public IP address in a browser
+
+---
+
+## Accessing the Wiki
+See [Accessing the Wiki](docs/accessing-the-wiki.md) for full details.  
+
+Example:  http://<EC2-Public-IP>/dokuwiki/doku.php
