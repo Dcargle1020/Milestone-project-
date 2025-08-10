@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+# Technical Stack
+# -----------------------------------------------------------------------------
+# How to run:  bash technical_stack.sh
+# -----------------------------------------------------------------------------
+
+cat <<'EOF'
+# Technical Stack
+
+- **Cloud**: Amazon Web Services (AWS)
+- **Compute**: EC2 t2.micro
+- **OS**: Ubuntu 24.04 LTS
+- **Web Server**: Apache 2.4.x
+- **Language/Runtime**: PHP 8.3 (with xml, mbstring, gd, zip)
+- **App**: DokuWiki (stable release)
+- **Automation**: Bash (cloud-init User Data)
+- **Security Group**: Inbound 22 (SSH), 80 (HTTP)
+EOF
