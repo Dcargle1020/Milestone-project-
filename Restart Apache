@@ -1,0 +1,2 @@
+systemctl restart apache2
+This command will stop the Apache2 service and then start it again, applying any recent configuration changes or resolving potential issues.
