@@ -31,3 +31,9 @@ The goal: **Automate** the entire setup so the server is fully functional at fir
 ```bash
 apt update -y
 apt install -y apache2 php libapache2-mod-php wget tar
+
+## Documentation
+- [Accessing the Wiki](docs/accessing-the-wiki.md)
+- [User Data Script](docs/user-data-script.md)
+- [CPU Health Check Report](reports/cpu-check.md)
+- [Troubleshooting Notes](reports/troubleshooting.md)
