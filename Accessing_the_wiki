@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+# Accessing the Wiki
+# -----------------------------------------------------------------------------
+# How to run:  bash accessing_the_wiki.sh <EC2_PUBLIC_IP>
+# Example:     bash accessing_the_wiki.sh 52.89.255.128
+# -----------------------------------------------------------------------------
+
+IP="${1:-<EC2-Public-IP>}"
+
+cat <<EOF
+# Accessing the Wiki
+
+URL:
+  http://${IP}/dokuwiki/doku.php
+
+Examples:
+  Home page (start id=home after first edit/creation):
+  http://${IP}/dokuwiki/doku.php?id=start
+
+  Pre-seeded pages:
+  http://${IP}/dokuwiki/doku.php?id=home
+  http://${IP}/dokuwiki/doku.php?id=aws_notes
+  http://${IP}/dokuwiki/doku.php?id=linux_commands
+EOF
+
+if [[ "$IP" != "<EC2-Public-IP>" ]]; then
+  echo
+  echo "Quick check (HTTP status):"
+  curl -s -o /dev/null -w "  %{http_code}\n" "http://${IP}/dokuwiki/doku.php" || true
+fi
