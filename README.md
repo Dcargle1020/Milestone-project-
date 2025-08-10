@@ -18,7 +18,8 @@ Application: DokuWiki (self-hosted wiki platform)
 Automation: Bash User Data Script for configuration at launch
 
 Deployment Steps
-1. EC2 Instance Setup
+
+EC2 Instance Setup
 Launched a new EC2 instance using Ubuntu as the AMI.
 
 Configured Security Group to allow:
