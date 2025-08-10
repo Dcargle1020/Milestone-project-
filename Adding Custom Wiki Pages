@@ -1,0 +1,12 @@
+Home Page (home.txt)
+====== Hello World! ======
+This is Dominique's Milestone Project powered by Apache + PHP on EC2.
+
+* [[aws_notes|AWS Notes]]
+* [[linux_commands|Linux Commands]]
+* AWS Notes (aws_notes.txt)
+
+Contains summaries of core AWS services: IAM, EC2, S3, VPC, CloudWatch, Route 53.
+
+Linux Commands (linux_commands.txt)
+Cheat sheet for commonly used commands: ls, cd, pwd, sudo, apt install, systemctl.
