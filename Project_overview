@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+# Project Overview – Milestone Project (AWS EC2 + DokuWiki Deployment)
+# -----------------------------------------------------------------------------
+# What this is:
+#   A self-contained overview of your project that prints to stdout when run.
+# How to run:
+#   bash project_overview.sh
+# -----------------------------------------------------------------------------
+
+cat <<'EOF'
+# Milestone Project – AWS EC2 + DokuWiki Deployment
+
+This project automates the deployment of a **DokuWiki** site on an **Apache** web
+server running **Ubuntu** on **Amazon EC2**. The entire setup is performed by a
+single **User Data** bash script at instance launch so the wiki is usable on
+first boot.
+
+**Key goals**
+- No manual SSH needed to finish setup
+- Start page set to `home`
+- Pre-seeded pages: `home`, `aws_notes`, `linux_commands`
+
+**Outcome**
+On launch, browse to:  
+`http://<EC2-Public-IP>/dokuwiki/doku.php` → you’ll see a working wiki, with
+your starter pages available immediately.
+
+EOF
