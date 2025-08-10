@@ -1,0 +1,11 @@
+Initial 404 Errors
+Occurred when accessing /doku.php before DokuWiki files were fully in place.
+Fix: Verified file paths and ensured files were extracted into /var/www/html/dokuwiki.
+
+“Topic does not exist yet” message
+Happened when the start page wasn’t created.
+Fix: Created start.txt and copied home.txt contents into it.
+
+Permissions Issues
+Apache needed proper access to DokuWiki directories.
+Fix: Used chown -R www-data:www-data /var/www/html/dokuwiki.
