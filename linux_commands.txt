@@ -1,3 +1,0 @@
-**ls**: List directory contents.
-**cd**: Change directory.
-**pwd**: Print working directory.
