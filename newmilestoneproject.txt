@@ -1,0 +1,86 @@
+#!/bin/bash
+set -euo pipefail
+exec > >(tee -a /var/log/user-data.log) 2>&1
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update -y
+apt-get install -y apache2 php libapache2-mod-php php-xml php-mbstring php-gd php-zip wget tar
+systemctl enable apache2
+systemctl start apache2
+
+a2disconf dokuwiki 2>/dev/null || true
+rm -f /etc/apache2/conf-enabled/dokuwiki.conf || true
+systemctl reload apache2 || true
+
+cd /var/www/html
+if [ ! -d /var/www/html/dokuwiki ]; then
+    wget -q https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+    tar -xzf dokuwiki-stable.tgz
+    mv "$(tar -tzf dokuwiki-stable.tgz | head -1 | cut -d/ -f1)" dokuwiki
+    rm -f dokuwiki-stable.tgz
+fi
+echo "=== html dir after extract ==="
+ls -l /var/www/html
+
+mkdir -p /var/www/html/dokuwiki/conf
+cat > /var/www/html/dokuwiki/conf/local.php <<'PHP'
+<?php
+$conf['title'] = 'Dominique\'s Milestone Wiki';
+$conf['start'] = 'home';
+PHP
+chmod 644 /var/www/html/dokuwiki/conf/local.php
+echo "=== local.php ==="
+sed -n '1,10p' /var/www/html/dokuwiki/conf/local.php
+
+
+install -d -o www-data -g www-data -m 755 \
+    /var/www/html/dokuwiki/data/pages \
+    /var/www/html/dokuwiki/data/meta \
+    /var/www/html/dokuwiki/data/media \
+    /var/www/html/dokuwiki/data/cache
+
+
+tee /var/www/html/dokuwiki/data/pages/home.txt >/dev/null <<'EOF'
+====== Hello World! ======
+This is Dominique's Milestone Project powered by Apache + PHP on EC2.
+* [[aws_notes|AWS Notes]]
+* [[linux_commands|Linux Commands]]
+EOF
+
+cp /var/www/html/dokuwiki/data/pages/home.txt /var/www/html/dokuwiki/data/pages/start.txt
+echo "=== pages dir ==="
+ls -l /var/www/html/dokuwiki/data/pages
+echo "=== head home ==="
+sed -n '1,3p' /var/www/html/dokuwiki/data/pages/home.txt
+echo "=== head start ==="
+sed -n '1,3p' /var/www/html/dokuwiki/data/pages/start.txt
+
+cat <<'EOF' | tee /var/www/html/dokuwiki/data/pages/aws_notes.txt > /dev/null
+====== AWS Notes ======
+**IAM**: Identity and Access Management for managing users, roles, and policies.
+**EC2**: Virtual servers in the cloud.
+**S3**: Scalable storage for data and backups.
+**VPC**: Virtual Private Cloud for isolated networking.
+**CloudWatch**: Monitoring and observability service.
+**Route 53**: DNS and domain registration service.
+EOF
+
+cat <<'EOF' | tee /var/www/html/dokuwiki/data/pages/linux_commands.txt > /dev/null
+====== Useful Linux Commands ======
+**ls**: List directory contents
+**cd**: Change directory
+**pwd**: Print current directory
+**sudo**: Run command as root (superuser)
+**apt update**: Refresh package list
+**apt install [pkg]**: Install software
+**systemctl status apache2**: Check Apache status
+**systemctl restart apache2**: Restart Apache
+**chmod**: Change file permissions
+**chown**: Change file ownership
+EOF
+
+
+chown -R www-data:www-data /var/www/html/dokuwiki
+find /var/www/html/dokuwiki/data/cache -type f -delete || true
+sudo -u www-data php /var/www/html/dokuwiki/bin/indexer.php -c || true
+systemctl restart apache2
