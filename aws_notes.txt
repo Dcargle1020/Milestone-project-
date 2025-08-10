@@ -1,3 +1,0 @@
-**IAM**: Identity and Access Management for managing users, roles, and policies.
-**EC2**: Virtual servers in the cloud.
-**S3**: Scalable storage for data and backups.
