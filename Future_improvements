@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+# Future Improvements
+# -----------------------------------------------------------------------------
+# How to run:  bash future_improvements.sh
+# -----------------------------------------------------------------------------
+
+cat <<'EOF'
+# Future Improvements
+
+- Add HTTPS (ACME/Let’s Encrypt) with automatic certificate renewal.
+- Create an AMI from a known-good instance to speed future launches.
+- Add CloudWatch alarms (CPU, StatusCheckFailed) and SNS notifications.
+- Parameterize User Data via SSM Parameter Store (title, start page, etc).
+- Add scheduled EBS snapshots or S3 backups of /var/www/html/dokuwiki.
+- Terraform/IaC for repeatable infra provisioning.
+EOF
