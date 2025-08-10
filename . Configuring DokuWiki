@@ -1,0 +1,7 @@
+Created and edited the local.php configuration file:
+<?php
+$conf['title'] = 'Dominique\'s Milestone Wiki';
+$conf['start'] = 'home';
+?>
+Adjusted permissions:
+chmod -R www-data:www-data /var/www/html/dokuwiki
